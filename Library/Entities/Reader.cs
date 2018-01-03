@@ -8,9 +8,9 @@ namespace Library
 {
     class Reader
     {
-        long Id { set; get; }
-        string Name { set; get; }
-        string Description { set; get; }
+        public long Id { set; get; }
+        public string Name { set; get; }
+        public string Description { set; get; }
 
         public Reader(long id, string name, string description)
         {

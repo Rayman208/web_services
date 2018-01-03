@@ -30,15 +30,20 @@ namespace Library
                 command.CommandText = "SELECT * FROM readers";
                 MySqlDataReader sqlReader = command.ExecuteReader();
 
-                readers.Clear();
+                List<Reader> tempReaders = new List<Reader>();
+
                 while (sqlReader.Read())
                 {
-                    readers.Add(new Reader(
+                    tempReaders.Add(new Reader(
                         sqlReader.GetInt64("id"),
                         sqlReader.GetString("name"),
                         sqlReader.GetString("description")
                         ));
                 }
+                sqlReader.Close();
+
+                readers.Clear();
+                readers.AddRange(tempReaders);
 
                 return true;
             }
@@ -47,5 +52,80 @@ namespace Library
                 return false;
             }
         }
+        
+        public bool DeleteById(long id)
+        {
+            try
+            {
+                command.CommandText = String.Format("DELETE FROM readers WHERE id={0}",id);
+                int affectedRows = command.ExecuteNonQuery();
+
+                if (affectedRows == 1)
+                {
+                    readers.RemoveAll(r => r.Id == id);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool UpdateById(Reader reader)
+        {
+            try
+            {
+                command.CommandText = String.Format("UPDATE readers SET name='{0}', description='{1}' WHERE id={2}", reader.Name, reader.Description, reader.Id);
+
+                int affectedRows = command.ExecuteNonQuery();
+
+                if (affectedRows == 1)
+                {
+                    int index = readers.FindIndex(r => r.Id == reader.Id);
+                    readers[index] = reader;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool Insert(Reader reader)
+        {
+            try
+            {
+                command.CommandText = String.Format("INSERT INTO readers(name,description) VALUE('{0}','{1}')", reader.Name, reader.Description);
+
+                int affectedRows = command.ExecuteNonQuery();
+
+                if (affectedRows == 1)
+                {
+                    reader.Id = command.LastInsertedId;
+                    readers.Add(reader);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
     }
 }
+

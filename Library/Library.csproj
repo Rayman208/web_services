@@ -58,6 +58,7 @@
     <Compile Include="FormLibrary.Designer.cs">
       <DependentUpon>FormLibrary.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormsControllers\FormLibraryController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormLibrary.resx">

@@ -12,9 +12,26 @@ namespace Library
 {
     public partial class FormLibrary : Form
     {
+        FormLibraryController flc;
+
         public FormLibrary()
         {
             InitializeComponent();
+        }
+
+        private void FormLibrary_Load(object sender, EventArgs e)
+        {
+            flc = new FormLibraryController(this);
+        }
+
+        private void buttonSelectReaders_Click(object sender, EventArgs e)
+        {
+            flc.SelectReaders();
+        }
+
+        private void buttonInsertReader_Click(object sender, EventArgs e)
+        {
+            flc.InsertReader();
         }
     }
 }

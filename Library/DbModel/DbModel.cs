@@ -16,7 +16,13 @@ namespace Library
 
         public List<Reader> readers { private set; get; }
 
-        public DbModel()
+        private static DbModel instance = null;
+        public static DbModel GetInstance()
+        {
+            if (instance == null) { instance = new DbModel(); }
+            return instance;
+        }
+        private DbModel()
         {
             connection = new MySqlConnection(connectionString);
             connection.Open();
@@ -25,5 +31,18 @@ namespace Library
 
             readersAdapter = new ReadersAdapter(readers, connection);
         }
+
+        #region READERS
+        public bool Readers_SelectAll()
+        {
+            return readersAdapter.SelectAll();
+        }
+
+        public bool Readers_Insert(Reader reader)
+        {
+            return readersAdapter.Insert(reader);
+        }
+
+        #endregion
     }
 }
