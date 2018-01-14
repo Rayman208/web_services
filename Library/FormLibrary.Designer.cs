@@ -31,17 +31,21 @@
             this.tabControlLibrary = new System.Windows.Forms.TabControl();
             this.tabPageRecords = new System.Windows.Forms.TabPage();
             this.tabPageReaders = new System.Windows.Forms.TabPage();
+            this.buttonInsertReader = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBoxReaderDescription = new System.Windows.Forms.TextBox();
+            this.textBoxReaderName = new System.Windows.Forms.TextBox();
             this.buttonSelectReaders = new System.Windows.Forms.Button();
             this.dataGridViewReaders = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPageBooks = new System.Windows.Forms.TabPage();
-            this.textBoxReaderName = new System.Windows.Forms.TextBox();
-            this.textBoxReaderDescription = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.buttonInsertReader = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBoxReaderId = new System.Windows.Forms.TextBox();
+            this.buttonUpdateReader = new System.Windows.Forms.Button();
+            this.buttonDeleteReader = new System.Windows.Forms.Button();
             this.tabControlLibrary.SuspendLayout();
             this.tabPageReaders.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReaders)).BeginInit();
@@ -71,6 +75,10 @@
             // 
             // tabPageReaders
             // 
+            this.tabPageReaders.Controls.Add(this.buttonDeleteReader);
+            this.tabPageReaders.Controls.Add(this.buttonUpdateReader);
+            this.tabPageReaders.Controls.Add(this.label3);
+            this.tabPageReaders.Controls.Add(this.textBoxReaderId);
             this.tabPageReaders.Controls.Add(this.buttonInsertReader);
             this.tabPageReaders.Controls.Add(this.label2);
             this.tabPageReaders.Controls.Add(this.label1);
@@ -85,6 +93,48 @@
             this.tabPageReaders.TabIndex = 1;
             this.tabPageReaders.Text = "Читатели";
             this.tabPageReaders.UseVisualStyleBackColor = true;
+            // 
+            // buttonInsertReader
+            // 
+            this.buttonInsertReader.Location = new System.Drawing.Point(305, 317);
+            this.buttonInsertReader.Name = "buttonInsertReader";
+            this.buttonInsertReader.Size = new System.Drawing.Size(190, 28);
+            this.buttonInsertReader.TabIndex = 6;
+            this.buttonInsertReader.Text = "Вставить читателя";
+            this.buttonInsertReader.UseVisualStyleBackColor = true;
+            this.buttonInsertReader.Click += new System.EventHandler(this.buttonInsertReader_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(194, 269);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(77, 17);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "description";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 266);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(43, 17);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "name";
+            // 
+            // textBoxReaderDescription
+            // 
+            this.textBoxReaderDescription.Location = new System.Drawing.Point(197, 289);
+            this.textBoxReaderDescription.Name = "textBoxReaderDescription";
+            this.textBoxReaderDescription.Size = new System.Drawing.Size(298, 22);
+            this.textBoxReaderDescription.TabIndex = 3;
+            // 
+            // textBoxReaderName
+            // 
+            this.textBoxReaderName.Location = new System.Drawing.Point(8, 289);
+            this.textBoxReaderName.Name = "textBoxReaderName";
+            this.textBoxReaderName.Size = new System.Drawing.Size(183, 22);
+            this.textBoxReaderName.TabIndex = 2;
             // 
             // buttonSelectReaders
             // 
@@ -107,11 +157,14 @@
             this.Column2,
             this.Column3});
             this.dataGridViewReaders.Location = new System.Drawing.Point(8, 6);
+            this.dataGridViewReaders.MultiSelect = false;
             this.dataGridViewReaders.Name = "dataGridViewReaders";
             this.dataGridViewReaders.ReadOnly = true;
             this.dataGridViewReaders.RowTemplate.Height = 24;
             this.dataGridViewReaders.Size = new System.Drawing.Size(487, 218);
             this.dataGridViewReaders.TabIndex = 0;
+            this.dataGridViewReaders.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewReaders_CellClick);
+         
             // 
             // Column1
             // 
@@ -141,47 +194,42 @@
             this.tabPageBooks.Text = "Книги";
             this.tabPageBooks.UseVisualStyleBackColor = true;
             // 
-            // textBoxReaderName
+            // label3
             // 
-            this.textBoxReaderName.Location = new System.Drawing.Point(8, 289);
-            this.textBoxReaderName.Name = "textBoxReaderName";
-            this.textBoxReaderName.Size = new System.Drawing.Size(183, 22);
-            this.textBoxReaderName.TabIndex = 2;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(9, 322);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(19, 17);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "id";
             // 
-            // textBoxReaderDescription
+            // textBoxReaderId
             // 
-            this.textBoxReaderDescription.Location = new System.Drawing.Point(197, 289);
-            this.textBoxReaderDescription.Name = "textBoxReaderDescription";
-            this.textBoxReaderDescription.Size = new System.Drawing.Size(298, 22);
-            this.textBoxReaderDescription.TabIndex = 3;
+            this.textBoxReaderId.Location = new System.Drawing.Point(6, 342);
+            this.textBoxReaderId.Name = "textBoxReaderId";
+            this.textBoxReaderId.ReadOnly = true;
+            this.textBoxReaderId.Size = new System.Drawing.Size(183, 22);
+            this.textBoxReaderId.TabIndex = 7;
             // 
-            // label1
+            // buttonUpdateReader
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 266);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 17);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "name";
+            this.buttonUpdateReader.Location = new System.Drawing.Point(6, 384);
+            this.buttonUpdateReader.Name = "buttonUpdateReader";
+            this.buttonUpdateReader.Size = new System.Drawing.Size(245, 26);
+            this.buttonUpdateReader.TabIndex = 9;
+            this.buttonUpdateReader.Text = "Обновить читателя";
+            this.buttonUpdateReader.UseVisualStyleBackColor = true;
+            this.buttonUpdateReader.Click += new System.EventHandler(this.buttonUpdateReader_Click);
             // 
-            // label2
+            // buttonDeleteReader
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(194, 269);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(77, 17);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "description";
-            // 
-            // buttonInsertReader
-            // 
-            this.buttonInsertReader.Location = new System.Drawing.Point(305, 317);
-            this.buttonInsertReader.Name = "buttonInsertReader";
-            this.buttonInsertReader.Size = new System.Drawing.Size(190, 28);
-            this.buttonInsertReader.TabIndex = 6;
-            this.buttonInsertReader.Text = "Вставить читателя";
-            this.buttonInsertReader.UseVisualStyleBackColor = true;
-            this.buttonInsertReader.Click += new System.EventHandler(this.buttonInsertReader_Click);
+            this.buttonDeleteReader.Location = new System.Drawing.Point(257, 383);
+            this.buttonDeleteReader.Name = "buttonDeleteReader";
+            this.buttonDeleteReader.Size = new System.Drawing.Size(238, 27);
+            this.buttonDeleteReader.TabIndex = 10;
+            this.buttonDeleteReader.Text = "Удалить читателя";
+            this.buttonDeleteReader.UseVisualStyleBackColor = true;
+            this.buttonDeleteReader.Click += new System.EventHandler(this.buttonDeleteReader_Click);
             // 
             // FormLibrary
             // 
@@ -216,6 +264,10 @@
         private System.Windows.Forms.Label label1;
         public System.Windows.Forms.TextBox textBoxReaderDescription;
         public System.Windows.Forms.TextBox textBoxReaderName;
+        private System.Windows.Forms.Button buttonDeleteReader;
+        private System.Windows.Forms.Button buttonUpdateReader;
+        private System.Windows.Forms.Label label3;
+        public System.Windows.Forms.TextBox textBoxReaderId;
     }
 }
 

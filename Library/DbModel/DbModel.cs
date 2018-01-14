@@ -43,6 +43,15 @@ namespace Library
             return readersAdapter.Insert(reader);
         }
 
+        public bool Readers_Delete(long id)
+        {
+            return readersAdapter.DeleteById(id);
+        }
+
+        public bool Readers_Update(Reader reader)
+        {
+            return readersAdapter.UpdateById(reader);
+        }
         #endregion
     }
 }

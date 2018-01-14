@@ -33,5 +33,20 @@ namespace Library
         {
             flc.InsertReader();
         }
+
+        private void dataGridViewReaders_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            flc.FillReaderFields();
+        }
+
+        private void buttonUpdateReader_Click(object sender, EventArgs e)
+        {
+            flc.UpdateReader();
+        }
+
+        private void buttonDeleteReader_Click(object sender, EventArgs e)
+        {
+            flc.DeleteReader();
+        }
     }
 }
