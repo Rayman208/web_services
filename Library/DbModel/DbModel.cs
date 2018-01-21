@@ -12,9 +12,12 @@ namespace Library
     {
         private string connectionString = "server=localhost;user=root;database=library;port=3306;password=1234;";
         private MySqlConnection connection;
+
         private ReadersAdapter readersAdapter;
+        private BooksAdapter booksAdapter;
 
         public List<Reader> readers { private set; get; }
+        public List<Book> books { private set; get; }
 
         private static DbModel instance = null;
         public static DbModel GetInstance()
@@ -28,8 +31,11 @@ namespace Library
             connection.Open();
 
             readers = new List<Reader>();
+            books = new List<Book>();
 
             readersAdapter = new ReadersAdapter(readers, connection);
+            booksAdapter = new BooksAdapter(books, connection);
+
         }
 
         #region READERS
@@ -53,5 +59,28 @@ namespace Library
             return readersAdapter.UpdateById(reader);
         }
         #endregion
+
+        #region BOOKS
+        public bool Books_SelectAll()
+        {
+            return booksAdapter.SelectAll();
+        }
+
+        public bool Books_Insert(Book book)
+        {
+            return booksAdapter.Insert(book);
+        }
+
+        public bool Books_Delete(long id)
+        {
+            return booksAdapter.DeleteById(id);
+        }
+
+        public bool Books_UpdateSettings(Book book)
+        {
+            return booksAdapter.UpdateBookSettingsById(book);
+        }
+        #endregion
+
     }
 }

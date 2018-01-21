@@ -76,6 +76,8 @@ namespace Library
             if (dbModel.Readers_Insert(reader) == true)
             {
                 ShowReaders();
+                form.textBoxReaderName.Clear();
+                form.textBoxReaderDescription.Clear();
             }
             else
             {
@@ -125,6 +127,122 @@ namespace Library
             else
             {
                 MessageBox.Show("Ошибка удаления читателя");
+            }
+        }
+        #endregion
+
+        #region BOOKS
+        private void ShowBooks()
+        {
+            form.dataGridViewBooks.Rows.Clear();
+            foreach (Book book in dbModel.books)
+            {
+                form.dataGridViewBooks.Rows.Add(
+                    book.Id,
+                    book.Name,
+                    book.Author,
+                    book.IdReader==0?"книга в библиотеке" : dbModel.readers.Find((r) =>r.Id == book.IdReader).Name
+                    );
+            }
+        }
+
+        public void FillBooksFields()
+        {
+            int rowIndex = form.dataGridViewBooks.SelectedCells[0].RowIndex;
+
+            DataGridViewRow selectedRow = form.dataGridViewBooks.Rows[rowIndex];
+
+            form.textBoxBookId.Text = selectedRow.Cells[0].Value.ToString();
+
+            form.textBoxBookName.Text = selectedRow.Cells[1].Value.ToString();
+
+            form.textBoxBookAuthor.Text = selectedRow.Cells[2].Value.ToString();
+
+            form.textBoxBookReader.Text = selectedRow.Cells[3].Value.ToString();
+        }
+
+        public void SelectBooks()
+        {
+            if (dbModel.Books_SelectAll() == true)
+            {
+                ShowBooks();
+            }
+            else
+            {
+                MessageBox.Show("Ошибка загрузки книг");
+            }
+        }
+
+        public void InsertBook()
+        {
+            if (
+               form.textBoxBookName.Text == String.Empty ||
+               form.textBoxBookAuthor.Text == String.Empty)
+            {
+                MessageBox.Show("Данные не заполнены");
+                return;
+            }
+
+            Book book = new Book
+                (0,
+                form.textBoxBookName.Text,
+                form.textBoxBookAuthor.Text,
+                0);
+
+            if (dbModel.Books_Insert(book) == true)
+            {
+                ShowBooks();
+                form.textBoxBookName.Clear();
+                form.textBoxBookAuthor.Clear();
+            }
+            else
+            {
+                MessageBox.Show("Ошибка вставки книги");
+            }
+        }
+
+        public void UpdateBook()
+        {
+            if (form.textBoxBookId.Text == String.Empty ||
+                form.textBoxBookName.Text == String.Empty ||
+                form.textBoxBookAuthor.Text == String.Empty)
+            {
+                MessageBox.Show("Данные не заполнены");
+                return;
+            }
+
+            Book book = new Book
+                (long.Parse(form.textBoxBookId.Text),
+                form.textBoxBookName.Text,
+                form.textBoxBookAuthor.Text,0);
+
+            if (dbModel.Books_UpdateSettings(book) == true)
+            {
+                ShowBooks();
+            }
+            else
+            {
+                MessageBox.Show("Ошибка обновления читателя");
+            }
+        }
+
+        public void DeleteBook()
+        {
+            if (form.textBoxBookId.Text == String.Empty)
+            {
+                MessageBox.Show("Данные не заполнены");
+                return;
+            }
+
+            long id = long.Parse(form.textBoxBookId.Text);
+
+            if (dbModel.Books_Delete(id) == true)
+            {
+                ShowBooks();
+            }
+            else
+            {
+                MessageBox.Show("Ошибка удаления книги");
             }
         }
         #endregion

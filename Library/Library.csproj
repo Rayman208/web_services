@@ -49,8 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DbAdapters\BooksAdapter.cs" />
     <Compile Include="DbAdapters\ReadersAdapter.cs" />
     <Compile Include="DbModel\DbModel.cs" />
+    <Compile Include="Entities\Book.cs" />
     <Compile Include="Entities\Reader.cs" />
     <Compile Include="FormLibrary.cs">
       <SubType>Form</SubType>

@@ -12,7 +12,7 @@ namespace Library
 {
     public partial class FormLibrary : Form
     {
-        FormLibraryController flc;
+        FormLibraryController fLibraryConroller;
 
         public FormLibrary()
         {
@@ -21,32 +21,59 @@ namespace Library
 
         private void FormLibrary_Load(object sender, EventArgs e)
         {
-            flc = new FormLibraryController(this);
+            fLibraryConroller = new FormLibraryController(this);
+            fLibraryConroller.SelectReaders();
+            fLibraryConroller.SelectBooks();
         }
 
         private void buttonSelectReaders_Click(object sender, EventArgs e)
         {
-            flc.SelectReaders();
+            fLibraryConroller.SelectReaders();
         }
 
         private void buttonInsertReader_Click(object sender, EventArgs e)
         {
-            flc.InsertReader();
+            fLibraryConroller.InsertReader();
         }
 
         private void dataGridViewReaders_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            flc.FillReaderFields();
+            fLibraryConroller.FillReaderFields();
         }
 
         private void buttonUpdateReader_Click(object sender, EventArgs e)
         {
-            flc.UpdateReader();
+            fLibraryConroller.UpdateReader();
         }
 
         private void buttonDeleteReader_Click(object sender, EventArgs e)
         {
-            flc.DeleteReader();
+            fLibraryConroller.DeleteReader();
+        }
+
+        private void buttonSelectBooks_Click(object sender, EventArgs e)
+        {
+            fLibraryConroller.SelectBooks();
+        }
+
+        private void buttonInsertBook_Click(object sender, EventArgs e)
+        {
+            fLibraryConroller.InsertBook();
+        }
+
+        private void buttonUpdateBook_Click(object sender, EventArgs e)
+        {
+            fLibraryConroller.UpdateBook();
+        }
+
+        private void buttonDeleteBook_Click(object sender, EventArgs e)
+        {
+            fLibraryConroller.DeleteBook();
+        }
+
+        private void dataGridViewBooks_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            fLibraryConroller.FillBooksFields();
         }
     }
 }
