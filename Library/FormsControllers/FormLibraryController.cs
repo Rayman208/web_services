@@ -57,7 +57,7 @@ namespace Library
                 MessageBox.Show("Ошибка загрузки читателей");
             }
         }
-        
+
         public void InsertReader()
         {
             if (
@@ -84,7 +84,7 @@ namespace Library
                 MessageBox.Show("Ошибка вставки читателя");
             }
         }
-        
+
         public void UpdateReader()
         {
             if (form.textBoxReaderId.Text == String.Empty ||
@@ -141,7 +141,7 @@ namespace Library
                     book.Id,
                     book.Name,
                     book.Author,
-                    book.IdReader==0?"книга в библиотеке" : dbModel.readers.Find((r) =>r.Id == book.IdReader).Name
+                    book.IdReader == 0 ? "книга в библиотеке" : dbModel.readers.Find((r) => r.Id == book.IdReader).Name
                     );
             }
         }
@@ -214,7 +214,7 @@ namespace Library
             Book book = new Book
                 (long.Parse(form.textBoxBookId.Text),
                 form.textBoxBookName.Text,
-                form.textBoxBookAuthor.Text,0);
+                form.textBoxBookAuthor.Text, 0);
 
             if (dbModel.Books_UpdateSettings(book) == true)
             {
@@ -245,6 +245,47 @@ namespace Library
                 MessageBox.Show("Ошибка удаления книги");
             }
         }
+        #endregion
+
+        #region RECORDS
+
+        private void ShowRecords()
+        {
+            form.dataGridViewRecords.Rows.Clear();
+            foreach (Record record in dbModel.records)
+            {
+                string date = new DateTime(1970, 1, 1, 0, 0, 0).AddSeconds(record.Date).ToString();
+
+                Book b = dbModel.books.Find(t => t.Id == record.IdBook);
+                string book = "\"" + b.Name + "\" : " + b.Author;
+
+                Reader r = dbModel.readers.Find(t => t.Id == record.IdReader);
+                string reader = r.Name + " - " + r.Description;
+
+                string action = record.Action == 1 ? "Взял" : "Сдал";
+
+                form.dataGridViewRecords.Rows.Add(
+                    record.Id,
+                    date,
+                    book,
+                    reader,
+                    action
+                    );
+            }
+        }
+
+        public void SelectRecords()
+        {
+            if (dbModel.Records_SelectAll() == true)
+            {
+                ShowRecords();
+            }
+            else
+            {
+                MessageBox.Show("Ошибка загрузки записей");
+            }
+        }
+
         #endregion
 
     }

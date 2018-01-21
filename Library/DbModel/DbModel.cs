@@ -15,9 +15,11 @@ namespace Library
 
         private ReadersAdapter readersAdapter;
         private BooksAdapter booksAdapter;
+        private RecordsAdapter recordsAdapter;
 
         public List<Reader> readers { private set; get; }
         public List<Book> books { private set; get; }
+        public List<Record> records { private set; get; }
 
         private static DbModel instance = null;
         public static DbModel GetInstance()
@@ -32,10 +34,11 @@ namespace Library
 
             readers = new List<Reader>();
             books = new List<Book>();
+            records = new List<Record>();
 
             readersAdapter = new ReadersAdapter(readers, connection);
             booksAdapter = new BooksAdapter(books, connection);
-
+            recordsAdapter = new RecordsAdapter(records, connection);
         }
 
         #region READERS
@@ -79,6 +82,23 @@ namespace Library
         public bool Books_UpdateSettings(Book book)
         {
             return booksAdapter.UpdateBookSettingsById(book);
+        }
+
+        public bool Books_UpdateReader(Book book)
+        {
+            return booksAdapter.UpdateIdReaderById(book);
+        }
+        #endregion
+
+        #region RECORDS
+        public bool Records_SelectAll()
+        {
+            return recordsAdapter.SelectAll();
+        }
+
+        public bool Records_Insert(Record record)
+        {
+            return recordsAdapter.Insert(record);
         }
         #endregion
 

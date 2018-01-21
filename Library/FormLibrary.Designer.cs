@@ -63,11 +63,20 @@
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewRecords = new System.Windows.Forms.DataGridView();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonSelectRecords = new System.Windows.Forms.Button();
             this.tabControlLibrary.SuspendLayout();
+            this.tabPageRecords.SuspendLayout();
             this.tabPageReaders.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReaders)).BeginInit();
             this.tabPageBooks.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBooks)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRecords)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlLibrary
@@ -79,15 +88,17 @@
             this.tabControlLibrary.Location = new System.Drawing.Point(0, 0);
             this.tabControlLibrary.Name = "tabControlLibrary";
             this.tabControlLibrary.SelectedIndex = 0;
-            this.tabControlLibrary.Size = new System.Drawing.Size(511, 515);
+            this.tabControlLibrary.Size = new System.Drawing.Size(582, 515);
             this.tabControlLibrary.TabIndex = 0;
             // 
             // tabPageRecords
             // 
+            this.tabPageRecords.Controls.Add(this.buttonSelectRecords);
+            this.tabPageRecords.Controls.Add(this.dataGridViewRecords);
             this.tabPageRecords.Location = new System.Drawing.Point(4, 25);
             this.tabPageRecords.Name = "tabPageRecords";
             this.tabPageRecords.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageRecords.Size = new System.Drawing.Size(503, 486);
+            this.tabPageRecords.Size = new System.Drawing.Size(574, 486);
             this.tabPageRecords.TabIndex = 0;
             this.tabPageRecords.Text = "Записи";
             this.tabPageRecords.UseVisualStyleBackColor = true;
@@ -108,7 +119,7 @@
             this.tabPageReaders.Location = new System.Drawing.Point(4, 25);
             this.tabPageReaders.Name = "tabPageReaders";
             this.tabPageReaders.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageReaders.Size = new System.Drawing.Size(503, 486);
+            this.tabPageReaders.Size = new System.Drawing.Size(574, 486);
             this.tabPageReaders.TabIndex = 1;
             this.tabPageReaders.Text = "Читатели";
             this.tabPageReaders.UseVisualStyleBackColor = true;
@@ -412,22 +423,81 @@
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
             // 
+            // dataGridViewRecords
+            // 
+            this.dataGridViewRecords.AllowUserToAddRows = false;
+            this.dataGridViewRecords.AllowUserToDeleteRows = false;
+            this.dataGridViewRecords.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewRecords.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column5,
+            this.Column6,
+            this.Column7,
+            this.Column8,
+            this.Column9});
+            this.dataGridViewRecords.Location = new System.Drawing.Point(8, 6);
+            this.dataGridViewRecords.Name = "dataGridViewRecords";
+            this.dataGridViewRecords.ReadOnly = true;
+            this.dataGridViewRecords.RowTemplate.Height = 24;
+            this.dataGridViewRecords.Size = new System.Drawing.Size(554, 161);
+            this.dataGridViewRecords.TabIndex = 0;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "id";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "Date";
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "Book";
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
+            // 
+            // Column8
+            // 
+            this.Column8.HeaderText = "Reader";
+            this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
+            // 
+            // Column9
+            // 
+            this.Column9.HeaderText = "Action";
+            this.Column9.Name = "Column9";
+            this.Column9.ReadOnly = true;
+            // 
+            // buttonSelectRecords
+            // 
+            this.buttonSelectRecords.Location = new System.Drawing.Point(372, 173);
+            this.buttonSelectRecords.Name = "buttonSelectRecords";
+            this.buttonSelectRecords.Size = new System.Drawing.Size(190, 27);
+            this.buttonSelectRecords.TabIndex = 2;
+            this.buttonSelectRecords.Text = "Заполнить таблицу";
+            this.buttonSelectRecords.UseVisualStyleBackColor = true;
+            // 
             // FormLibrary
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(511, 515);
+            this.ClientSize = new System.Drawing.Size(582, 515);
             this.Controls.Add(this.tabControlLibrary);
             this.Name = "FormLibrary";
             this.Text = "Библиотекарь v 2.0";
             this.Load += new System.EventHandler(this.FormLibrary_Load);
             this.tabControlLibrary.ResumeLayout(false);
+            this.tabPageRecords.ResumeLayout(false);
             this.tabPageReaders.ResumeLayout(false);
             this.tabPageReaders.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReaders)).EndInit();
             this.tabPageBooks.ResumeLayout(false);
             this.tabPageBooks.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBooks)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRecords)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -469,6 +539,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.Button buttonSelectRecords;
+        public System.Windows.Forms.DataGridView dataGridViewRecords;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
     }
 }
 

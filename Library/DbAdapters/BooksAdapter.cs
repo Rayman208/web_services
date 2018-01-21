@@ -102,6 +102,31 @@ namespace Library
             }
         }
 
+        public bool UpdateIdReaderById(Book book)
+        {
+            try
+            {
+                command.CommandText = String.Format("UPDATE books SET id_reader={0} WHERE id={1}", book.IdReader, book.Id);
+
+                int affectedRows = command.ExecuteNonQuery();
+
+                if (affectedRows == 1)
+                {
+                    int index = books.FindIndex(r => r.Id == book.Id);
+                    books[index] = book;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public bool Insert(Book book)
         {
             try

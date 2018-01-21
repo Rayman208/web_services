@@ -24,6 +24,7 @@ namespace Library
             fLibraryConroller = new FormLibraryController(this);
             fLibraryConroller.SelectReaders();
             fLibraryConroller.SelectBooks();
+            fLibraryConroller.SelectRecords();
         }
 
         private void buttonSelectReaders_Click(object sender, EventArgs e)
