@@ -249,7 +249,7 @@ namespace Library
 
         #region RECORDS
 
-        private void ShowRecords()
+        public void ShowRecords()
         {
             form.dataGridViewRecords.Rows.Clear();
             foreach (Record record in dbModel.records)
@@ -283,6 +283,99 @@ namespace Library
             else
             {
                 MessageBox.Show("Ошибка загрузки записей");
+            }
+        }
+
+        private void ShowReadersForRecords()
+        {
+            form.dataGridViewReadersForRecords.Rows.Clear();
+            foreach (Reader reader in dbModel.readers)
+            {
+                form.dataGridViewReadersForRecords.Rows.Add(
+                    reader.Id,
+                    reader.Name,
+                    reader.Description
+                    );
+            }
+        }
+
+        public void SelectReadersForRecords()
+        {
+            if (dbModel.Readers_SelectAll() == true)
+            {
+                ShowReadersForRecords();
+            }
+            else
+            {
+                MessageBox.Show("Ошибка загрузки читателей");
+            }
+        }
+
+        public void FillReaderBooks()
+        {
+            int rowIndex = form.dataGridViewReadersForRecords.SelectedCells[0].RowIndex;
+
+            int idReader = int.Parse(form.dataGridViewReadersForRecords[0, rowIndex].Value.ToString());
+
+            List<Book> readerBooks = dbModel.books.Where(b => b.IdReader == idReader).ToList();
+
+            form.dataGridViewBooksForReader.Rows.Clear();
+            foreach (Book book in readerBooks)
+            {
+                form.dataGridViewBooksForReader.Rows.Add(
+                    book.Id,
+                    book.Name,
+                    book.Author
+                    );
+            }
+        }
+
+        public void ReturnSelectedBook()
+        {
+            int rowIndex = form.dataGridViewBooksForReader.SelectedCells[0].RowIndex;
+
+            int idBook = int.Parse(form.dataGridViewBooksForReader[0, rowIndex].Value.ToString());
+
+            rowIndex = form.dataGridViewReadersForRecords.SelectedCells[0].RowIndex;
+
+            int idReader = int.Parse(form.dataGridViewReadersForRecords[0, rowIndex].Value.ToString());
+
+            Record record = new Record(-1, -1, idBook, idReader, -1);
+            dbModel.Records_Insert(record);
+
+            Book book = new Book(idBook, "", "", 0);
+            dbModel.Books_UpdateReader(book);
+        }
+
+        public void GiveSelectedBook()
+        {
+            int rowIndex = form.dataGridViewBooksWithoutReader.SelectedCells[0].RowIndex;
+
+            int idBook = int.Parse(form.dataGridViewBooksWithoutReader[0, rowIndex].Value.ToString());
+
+            rowIndex = form.dataGridViewReadersForRecords.SelectedCells[0].RowIndex;
+
+            int idReader = int.Parse(form.dataGridViewReadersForRecords[0, rowIndex].Value.ToString());
+
+            Record record = new Record(-1, -1, idBook, idReader, 1);
+            dbModel.Records_Insert(record);
+
+            Book book = new Book(idBook, "", "", idReader);
+            dbModel.Books_UpdateReader(book);
+        }
+
+        public void ShowBooksWithoutReader()
+        {
+            List<Book> readerBooks = dbModel.books.Where(b => b.IdReader == 0).ToList();
+
+            form.dataGridViewBooksWithoutReader.Rows.Clear();
+            foreach (Book book in readerBooks)
+            {
+                form.dataGridViewBooksWithoutReader.Rows.Add(
+                    book.Id,
+                    book.Name,
+                    book.Author
+                    );
             }
         }
 

@@ -87,7 +87,8 @@ namespace Library
                 if (affectedRows == 1)
                 {
                     int index = readers.FindIndex(r => r.Id == reader.Id);
-                    readers[index] = reader;
+                    readers[index].Name = reader.Name;
+                    readers[index].Description = reader.Description;
                     return true;
                 }
                 else

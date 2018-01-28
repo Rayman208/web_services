@@ -88,7 +88,8 @@ namespace Library
                 if (affectedRows == 1)
                 {
                     int index = books.FindIndex(r => r.Id == book.Id);
-                    books[index] = book;
+                    books[index].Author = book.Author;
+                    books[index].Name = book.Name;
                     return true;
                 }
                 else
@@ -113,7 +114,7 @@ namespace Library
                 if (affectedRows == 1)
                 {
                     int index = books.FindIndex(r => r.Id == book.Id);
-                    books[index] = book;
+                    books[index].IdReader = book.IdReader;
                     return true;
                 }
                 else

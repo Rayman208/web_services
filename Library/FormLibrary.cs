@@ -12,7 +12,7 @@ namespace Library
 {
     public partial class FormLibrary : Form
     {
-        FormLibraryController fLibraryConroller;
+        FormLibraryController formLibraryController;
 
         public FormLibrary()
         {
@@ -21,60 +21,93 @@ namespace Library
 
         private void FormLibrary_Load(object sender, EventArgs e)
         {
-            fLibraryConroller = new FormLibraryController(this);
-            fLibraryConroller.SelectReaders();
-            fLibraryConroller.SelectBooks();
-            fLibraryConroller.SelectRecords();
+            formLibraryController = new FormLibraryController(this);
+            formLibraryController.SelectReaders();
+            formLibraryController.SelectBooks();
+            formLibraryController.SelectRecords();
+            formLibraryController.SelectReadersForRecords();
+            formLibraryController.ShowBooksWithoutReader();
         }
 
         private void buttonSelectReaders_Click(object sender, EventArgs e)
         {
-            fLibraryConroller.SelectReaders();
+            formLibraryController.SelectReaders();
         }
 
         private void buttonInsertReader_Click(object sender, EventArgs e)
         {
-            fLibraryConroller.InsertReader();
+            formLibraryController.InsertReader();
         }
 
         private void dataGridViewReaders_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            fLibraryConroller.FillReaderFields();
+            formLibraryController.FillReaderFields();
         }
 
         private void buttonUpdateReader_Click(object sender, EventArgs e)
         {
-            fLibraryConroller.UpdateReader();
+            formLibraryController.UpdateReader();
         }
 
         private void buttonDeleteReader_Click(object sender, EventArgs e)
         {
-            fLibraryConroller.DeleteReader();
+            formLibraryController.DeleteReader();
         }
 
         private void buttonSelectBooks_Click(object sender, EventArgs e)
         {
-            fLibraryConroller.SelectBooks();
+            formLibraryController.SelectBooks();
         }
 
         private void buttonInsertBook_Click(object sender, EventArgs e)
         {
-            fLibraryConroller.InsertBook();
+            formLibraryController.InsertBook();
         }
 
         private void buttonUpdateBook_Click(object sender, EventArgs e)
         {
-            fLibraryConroller.UpdateBook();
+            formLibraryController.UpdateBook();
         }
 
         private void buttonDeleteBook_Click(object sender, EventArgs e)
         {
-            fLibraryConroller.DeleteBook();
+            formLibraryController.DeleteBook();
         }
 
         private void dataGridViewBooks_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            fLibraryConroller.FillBooksFields();
+            formLibraryController.FillBooksFields();
+        }
+
+        private void dataGridViewRecords_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void buttonSelectReadersForRecords_Click(object sender, EventArgs e)
+        {
+            formLibraryController.SelectReadersForRecords();
+        }
+
+        private void dataGridViewReadersForRecords_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            formLibraryController.FillReaderBooks();
+        }
+
+        private void buttonReturnSelectedBook_Click(object sender, EventArgs e)
+        {
+            formLibraryController.ReturnSelectedBook();
+            formLibraryController.FillReaderBooks();
+            formLibraryController.ShowRecords();
+            formLibraryController.ShowBooksWithoutReader();
+        }
+
+        private void buttonGiveSelectedBook_Click(object sender, EventArgs e)
+        {
+            formLibraryController.GiveSelectedBook();
+            formLibraryController.ShowBooksWithoutReader();
+            formLibraryController.FillReaderBooks();
+            formLibraryController.ShowRecords();
         }
     }
 }

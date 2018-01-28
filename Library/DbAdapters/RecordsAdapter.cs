@@ -66,6 +66,15 @@ namespace Library
                 if (affectedRows == 1)
                 {
                     record.Id = command.LastInsertedId;
+
+                    command.CommandText = String.Format("SELECT * FROM records WHERE id={0}", command.LastInsertedId);
+                    MySqlDataReader reader = command.ExecuteReader();
+                    if (reader.Read()==true)
+                    {
+                        record.Date = reader.GetInt32("date");
+                    }
+                    reader.Close();
+
                     records.Add(record);
                     return true;
                 }
